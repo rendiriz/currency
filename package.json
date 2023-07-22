@@ -1,14 +1,13 @@
 {
   "scripts": {
     "dev": "concurrently \"wrangler dev --live-reload src/index.tsx\" \"npm run tw:dev\"",
-    "deploy": "concurrently \"wrangler deploy --minify src/index.tsx\" \"npm run tw\"",
+    "deploy": "npm run tw && wrangler deploy --minify src/index.tsx",
     "tw": "npx tailwindcss -i ./src/styles.css -o ./assets/static/styles.css",
     "tw:dev": "npx tailwindcss -i ./src/styles.css -o ./assets/static/styles.css --watch"
   },
   "dependencies": {
     "@hono/node-server": "^1.1.0",
     "@hono/zod-validator": "^0.1.3",
-    "axios": "^1.4.0",
     "hono": "^3.3.2",
     "zod": "^3.21.4"
   },

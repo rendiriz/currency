@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: any }) => html`
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Currency — Rendi Riz</title>
-      <link rel="icon" href="/static/favicon.svg" />
+      <link rel="icon" href="/favicon.svg" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link

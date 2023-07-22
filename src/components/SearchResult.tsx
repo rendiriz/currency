@@ -1,11 +1,11 @@
 import { html } from 'hono/html';
 
-interface SearchResult {
+type SearchResult = {
   from: string;
   to: string;
   date: string;
   rate: number;
-}
+};
 
 function SearchResult({ data }: { data?: SearchResult }) {
   if (!data) return html`<div id="search-result"></div>`;

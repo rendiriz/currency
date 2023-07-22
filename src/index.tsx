@@ -1,8 +1,7 @@
-import { Hono } from 'hono';
+import { Hono } from 'hono/quick';
 import { serveStatic } from 'hono/cloudflare-workers';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
-import axios from 'axios';
 import Layout from '@/components/Layout';
 import Search from '@/components/Search';
 import SearchResult from '@/components/SearchResult';
@@ -38,23 +37,24 @@ app.post(
     const { from, to } = c.req.valid('form');
 
     const url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}/${to}.json`;
-    const res = await axios.get(url);
+    const res = await fetch(url);
+    const data: { date: string; [x: string]: any } = await res.json();
 
-    const date = new Date(res.data.date).toLocaleDateString('en-US', {
+    const date = new Date(data.date).toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
 
-    const data = {
+    const props = {
       from,
       to,
       date,
-      rate: res.data[to],
+      rate: data[to],
     };
 
-    return c.html(<SearchResult data={data} />);
+    return c.html(<SearchResult data={props} />);
   },
 );
 
