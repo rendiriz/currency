@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { serve } from '@hono/node-server';
+import { handle } from '@hono/node-server/vercel';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
@@ -78,4 +78,4 @@ app.post(
   },
 );
 
-serve(app);
+export default handle(app);
