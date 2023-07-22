@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
-import { handle } from '@hono/node-server/vercel';
-import { serveStatic } from '@hono/node-server/serve-static';
+import { serveStatic } from 'hono/cloudflare-workers';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
 import axios from 'axios';
@@ -10,7 +9,8 @@ import SearchResult from '@/components/SearchResult';
 
 const app = new Hono();
 
-app.use('/assets/*', serveStatic({ root: './' }));
+app.get('/static/*', serveStatic({ root: './' }));
+app.get('/favicon.svg', serveStatic({ path: './favicon.svg' }));
 
 app.get('/', (c) => {
   return c.html(
@@ -78,4 +78,4 @@ app.post(
   },
 );
 
-export default handle(app);
+export default app;

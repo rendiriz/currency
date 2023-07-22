@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev": "concurrently \"tsx watch src/index.tsx\" \"npm run tw:dev\"",
-    "prod": "concurrently \"tsx src/index.tsx\" \"npm run tw\"",
-    "tw": "npx tailwindcss -i ./src/styles.css -o ./assets/styles.css",
-    "tw:dev": "npx tailwindcss -i ./src/styles.css -o ./assets/styles.css --watch"
+    "dev": "concurrently \"wrangler dev --live-reload src/index.tsx\" \"npm run tw:dev\"",
+    "deploy": "concurrently \"wrangler deploy --minify src/index.tsx\" \"npm run tw\"",
+    "tw": "npx tailwindcss -i ./src/styles.css -o ./assets/static/styles.css",
+    "tw:dev": "npx tailwindcss -i ./src/styles.css -o ./assets/static/styles.css --watch"
   },
   "dependencies": {
     "@hono/node-server": "^1.1.0",
@@ -13,10 +13,11 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230717.1",
     "concurrently": "^8.2.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "^3.3.3",
-    "tsx": "^3.12.2"
+    "wrangler": "^3.3.0"
   }
 }
