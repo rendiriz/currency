@@ -36,7 +36,7 @@ app.post(
   async (c) => {
     const { from, to } = c.req.valid('form');
 
-    const url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}/${to}.json`;
+    const url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${from}.json`;
     const res = await fetch(url);
     const data: { date: string; [x: string]: any } = await res.json();
 
@@ -51,7 +51,7 @@ app.post(
       from,
       to,
       date,
-      rate: data[to],
+      rate: data[from][to],
     };
 
     return c.html(<SearchResult data={props} />);
